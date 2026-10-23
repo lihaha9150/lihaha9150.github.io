@@ -1,19 +1,237 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-  <title>个人技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小布衣 | 个人技术博客</title>
+  <meta name="description" content="记录计算机学习、深度学习研究与个人软件项目">
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --ink: #182338;
+      --muted: #637084;
+      --accent: #2563eb;
+      --border: #e3e9f2;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav a { color: var(--ink); font-size: 14px; }
+    main { max-width: 1040px; margin: auto; padding: 32px 20px; }
+    .hero {
+      background: linear-gradient(125deg, #172554, #2563eb);
+      color: white;
+      padding: 52px 36px;
+      border-radius: 20px;
+      margin-bottom: 35px;
+    }
+    .hero h1 { font-size: 32px; margin: 0 0 12px; }
+    .hero p { max-width: 650px; opacity: .92; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: rgba(255,255,255,.16);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    section { margin: 36px 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+    .card h3 { margin-top: 0; }
+    .muted { color: var(--muted); }
+    pre {
+      padding: 18px;
+      overflow-x: auto;
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 32px 22px; }
+      .hero h1 { font-size: 26px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>我的小布衣</h1>
-  <p>电子信息研究生，主要学习方向为深度学习、计算机视觉等</p>
 
-  <h2>学习笔记</h2>
-  <p>Python、Linux、深度学习与计算机视觉</p>
+<header>
+  <strong>小布衣 · Tech Blog</strong>
+  <nav>
+    <a href="#about">关于我</a>
+    <a href="#notes">学习笔记</a>
+    <a href="#research">科研记录</a>
+    <a href="#projects">个人项目</a>
+  </nav>
+</header>
 
-  <h2>个人项目</h2>
-  <p>整理已完成的项目、技术方案和开源代码。</p>
+<main>
+  <div class="hero" id="about">
+    <h1>你好，我是小布衣 👋</h1>
+    <p>
+      一名电子信息专业学生，关注深度学习、计算机视觉与软件开发。里记录我的学习过程、科研实践和项目开发经验。
+    </p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">PyTorch</span>
+      <span class="tag">Linux</span>
+      <span class="tag">Computer Vision</span>
+    </div>
+  </div>
+
+  <section id="notes">
+    <h2>📚 学习笔记</h2>
+    <p class="muted">记录实际使用过的开发工具和技术。</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Linux 与 GPU 服务器</h3>
+        <p>训练环境、GPU 状态检查、tmux 会话管理。</p>
+        <a href="#linux-note">阅读笔记 →</a>
+      </div>
+      <div class="card">
+        <h3>深度学习实践</h3>
+        <p>模型训练、实验记录、评价指标和复现流程。</p>
+        <a href="#research">查看科研实践 →</a>
+      </div>
+    </div>
+
+    <article class="card" id="linux-note">
+      <h3>学习记录 01：Linux GPU 训练常用命令</h3>
+      <p>
+        进行深度学习实验时，需要了解 GPU 显存占用、
+        进程运行状态，以及如何保持远程训练任务持续运行。
+      </p>
+      <h4>1. 查看 GPU 状态</h4>
+      <pre><code>nvidia-smi</code></pre>
+      <p>
+        这条命令可以查看 GPU 利用率、显存占用、
+        驱动信息以及正在使用 GPU 的进程。
+      </p>
+      <h4>2. 定时刷新 GPU 状态</h4>
+      <pre><code>watch -n 2 nvidia-smi</code></pre>
+      <p>每隔两秒刷新一次，适合观察模型训练时的资源变化。</p>
+      <h4>3. 使用 tmux 管理训练会话</h4>
+      <pre><code>tmux new -s train
+tmux ls
+tmux attach -t train</code></pre>
+      <p>
+        可以创建名为 train 的会话、列出会话、
+        以及重新连接指定会话。
+        临时离开会话可以按 Ctrl+B，然后按 D。
+      </p>
+      <p>
+        <strong>实践总结：</strong>
+        使用 GPU 状态监控和 tmux，可以更方便地管理
+        远程深度学习实验，减少 SSH 连接中断造成的影响。
+      </p>
+    </article>
+  </section>
+
+  <section id="research">
+    <h2>🔬 科研记录</h2>
+
+    <article class="card">
+      <h3>水下图像增强研究</h3>
+      <p class="muted">方向：图像恢复 · 深度学习 · 计算机视觉</p>
+      <p>
+        水下图像常出现颜色偏移、对比度下降和细节退化。
+        我的研究关注如何利用空间信息与频率信息，
+        改善水下图像的视觉质量和结构恢复能力。
+      </p>
+      <p><strong>当前研究内容：</strong></p>
+      <ul>
+        <li>探索空间与频率特征协同恢复的网络结构。</li>
+        <li>研究全局与局部频率信息的作用。</li>
+        <li>通过 PSNR、SSIM 等指标评价模型表现。</li>
+        <li>使用对比实验和消融实验分析模块有效性。</li>
+      </ul>
+      <p class="muted">
+        当前状态：研究与实验整理中。
+        后续计划补充网络架构、实验过程与可公开结果。
+      </p>
+    </article>
+  </section>
+
+  <section id="projects">
+    <h2>💻 个人项目</h2>
+
+    <div class="card">
+      <h3>项目 01：水下图像增强模型实验</h3>
+      <p>
+        使用 Python 与 PyTorch 开展图像增强模型研究。
+        工作涉及数据集处理、网络训练、模型评估、
+        训练日志管理与实验对比。
+      </p>
+      <p><strong>技术栈：</strong>Python / PyTorch / Linux</p>
+      <p><strong>项目状态：</strong>持续研究中</p>
+      <p>
+        后续补充：项目架构图、实际运行截图、
+        技术说明和可以公开的代码链接。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>GitHub 开发记录</h3>
+      <p>
+        个人代码仓库、学习实践和未来的开源项目
+        统一整理在 GitHub。
+      </p>
+      <a href="https://github.com/lihaha9150" target="_blank"
+         rel="noopener noreferrer">访问 GitHub 主页 →</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>📮 联系与交流</h2>
+    <div class="card">
+      <p>欢迎通过 GitHub 关注我的学习和项目记录。</p>
+      <a href="https://github.com/lihaha9150" target="_blank"
+         rel="noopener noreferrer">GitHub: lihaha9150</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 小布衣 · Built with GitHub Pages
+</footer>
+
 </body>
 </html>
